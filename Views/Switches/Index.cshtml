@@ -1,0 +1,94 @@
+@using Commutator.Models;
+@model SwitchesViewModel;
+
+@{
+    ViewData["Title"] = "Список коммутаторов";
+}
+
+<h2 class="text text-center">Список коммутаторов</h2>
+<form method="get">
+    <div class="d-flex justify-content-end">
+        <input border="1" class="form-control w-25" type="text" name="search" value="@Model.SearchQuery"
+            class="form-control" placeholder="Поиск по модели" />
+        <button type="submit" class="btn btn-primary">Поиск</button>
+        <a asp-action="Index" class="btn btn-secondary">Сбросить</a>
+    </div>
+
+    <details>
+        <summary style="cursor:pointer;">Расширенный поиск</summary>
+        <div class="form-group">
+            <label>Модель:</label>
+            <input type="text" name="modelFilter" value="@Model.ModelFilter" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>IP-адрес:</label>
+            <input type="text" name="ipFilter" value="@Model.IpFilter" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>MAC-адрес:</label>
+            <input type="text" name="macFilter" value="@Model.MacFilter" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>VLAN:</label>
+            <input type="text" name="vlanFilter" value="@Model.VlanFilter" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Инвентарный номер:</label>
+            <input type="text" name="inventoryFilter" value="@Model.InventoryFilter" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Этаж:</label>
+            <input type="text" name="floorFilter" value="@Model.FloorFilter" class="form-control" />
+        </div>
+    </details>
+</form>
+
+
+
+<div class="text-center">
+    <table class="table table-bordered text-center" border="1">
+
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Модель</th>
+                <th>IP-Адрес</th>
+                <th>MAC-Адрес</th>
+                <th>Управляющий VLAN</th>
+                <th>Серийный номер</th>
+                <th>Инвентарный номер</th>
+                <th>Дата покупки</th>
+                <th>Дата установки</th>
+                <th>Этаж</th>
+                <th>Комментарий</th>
+                <th> </th>
+                <th> </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var sw in Model.Switches)
+            {
+                <tr>
+                    <td>@sw.Id</td>
+                    <td>@sw.Model</td>
+                    <td>@sw.IpAddress</td>
+                    <td>@sw.MacAddress</td>
+                    <td>@sw.Vlan</td>
+                    <td>@sw.SerialNumber</td>
+                    <td>@sw.InventoryNumber</td>
+                    <td>@sw.PurchaseDate</td>
+                    <td>@sw.InstallationDate</td>
+                    <td>@sw.Floor</td>
+                    <td>@sw.Comment</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@sw.Id" class="btn btn-warning">Редактировать</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@sw.Id" class="btn btn-danger">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

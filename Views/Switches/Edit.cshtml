@@ -1,0 +1,76 @@
+@model Commutator.Models.Switch
+
+<h2 style="text-align: center;">Редактировать коммутатор</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Model">Модель</label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="IpAddress">IP - Адрес</label>
+        <input asp-for="IpAddress" class="form-control" />
+        <span asp-validation-for="IpAddress" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SerialNumber">Серийный номер</label>
+        <input asp-for="SerialNumber" class="form-control" />
+        <span asp-validation-for="SerialNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MacAddress">MAC - Адрес</label>
+        <input asp-for="MacAddress" class="form-control" />
+        <span asp-validation-for="MacAddress" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Vlan">Управляющий VLAN</label>
+        <input asp-for="Vlan" class="form-control" />
+        <span asp-validation-for="Vlan" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InventoryNumber">Инвентарный номер</label>
+        <input asp-for="InventoryNumber" class="form-control" />
+        <span asp-validation-for="InventoryNumber" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PurchaseDate">Дата покупки</label>
+        <input asp-for="PurchaseDate" class="form-control" type="date"/>
+        <span asp-validation-for="PurchaseDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InstallationDate">Дата установки</label>
+        <input asp-for="InstallationDate" class="form-control" type="date" />
+        <span asp-validation-for="InstallationDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Floor">Этаж</label>
+        <input asp-for="Floor" class="form-control" />
+        <span asp-validation-for="Floor" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Comment">Комментарий</label>
+        <input asp-for="Comment" class="form-control" />
+        <span asp-validation-for="Comment" class="text-danger"></span>
+    </div>
+
+    <div class="text-center" style="margin-top: 50px;">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <a asp-action="Index" class="btn btn-secondary">Отмена</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

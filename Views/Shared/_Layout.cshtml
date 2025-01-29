@@ -1,0 +1,86 @@
+﻿@using Commutator.Models
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Commutator</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Commutator.styles.css" asp-append-version="true" />
+
+    <style>
+        .pagination-container {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-action="Index">Коммутаторы</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-action="Create">Добавить</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container d-flex flex-column justify-content-center align-items-center">
+        <main role="main" class="pb-1 w-97">
+            @RenderBody()
+        </main>
+    </div>
+
+    @if (Model is SwitchesViewModel vm)
+    {
+        <div class="pagination-container">
+            <div class="pagination">
+                <a asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)"
+                    class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : "")">Назад</a>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <a asp-action="Index" asp-route-page="@i"
+                        class="btn @(i == Model.CurrentPage ? "btn-secondary" : "btn-outline-primary")">@i</a>
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <a asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)" class="btn btn-primary">Вперед</a>
+                }
+            </div>
+        </div>
+    }
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>
