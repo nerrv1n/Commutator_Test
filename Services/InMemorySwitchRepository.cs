@@ -27,7 +27,6 @@ public class InMemorySwitchRepository
         new Switch { Id = 21, Model = "Extreme Networks X440", IpAddress = "192.168.1.7", MacAddress = "00:G6:I8:BC:3D:A1", Vlan = 70, SerialNumber = "SN654987", InventoryNumber = "INV007", PurchaseDate = DateTime.Parse("2020-09-25"), InstallationDate = DateTime.Parse("2020-10-10"), Floor = "7", Comment = "Коммутатор центра обработки данных" },
         new Switch { Id = 22, Model = "Aruba 2930F", IpAddress = "192.168.1.8", MacAddress = "00:H7:J9:CD:4E:B2", Vlan = 80, SerialNumber = "SN852741", InventoryNumber = "INV008", PurchaseDate = DateTime.Parse("2021-06-30"), InstallationDate = DateTime.Parse("2021-07-15"), Floor = "8", Comment = "Беспроводной коммутатор" },
         new Switch { Id = 23, Model = "Brocade ICX 7250", IpAddress = "192.168.1.9", MacAddress = "00:I8:K0:DE:5F:C3", Vlan = 90, SerialNumber = "SN963258", InventoryNumber = "INV009", PurchaseDate = DateTime.Parse("2017-12-20"), InstallationDate = DateTime.Parse("2018-01-05"), Floor = "9", Comment = "Коммутатор серверной стойки" },
-        new Switch { Id = 24, Model = "MikroTik CRS326", IpAddress = "192.168.1.10", MacAddress = "00:J9:L1:EF:6G:D4", Vlan = 100, SerialNumber = "SN147852", InventoryNumber = "INV010", PurchaseDate = DateTime.Parse("2024-01-01"), InstallationDate = DateTime.Parse("2024-01-15"), Floor = "10", Comment = "Новый установленный коммутатор" }
     ];
 
     public IEnumerable<Switch> GetPagedSwitches(int page, int pageSize)
