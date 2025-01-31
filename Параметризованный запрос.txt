@@ -1,0 +1,32 @@
+DECLARE @X INT = 2;
+DECLARE @Y MONEY = 100;
+DECLARE @Z INT = 1;
+
+WITH SalesData AS (
+    SELECT
+        r.RegionName,
+        p.ProductName,
+        SUM(oi.ProductCount) AS TotalCount,
+        SUM(oi.ProductCount * pr.Price) AS TotalSum,
+        COUNT(DISTINCT oi.PersonId) AS UniquePersons,
+        ROW_NUMBER() OVER (PARTITION BY r.id ORDER BY SUM(oi.ProductCount * pr.Price) DESC) AS ProductRank
+    FROM dbo.orderItem oi
+    JOIN dbo.Person o ON oi.PersonId = o.id
+    JOIN dbo.Region r ON o.RegionId = r.id
+    JOIN dbo.Price pr ON oi.PriceId = pr.id
+    JOIN dbo.Product p ON pr.ProductId = p.id
+    GROUP BY r.id, p.id, r.RegionName, p.ProductName
+    HAVING SUM(oi.ProductCount) >= @X
+       AND SUM(oi.ProductCount * pr.Price) >= @Y
+       AND COUNT(DISTINCT oi.PersonId) >= @Z
+)
+SELECT 
+    RegionName,
+    ProductName,
+    TotalCount,
+    UniquePersons,
+    TotalSum
+FROM SalesData
+WHERE ProductRank = 1
+ORDER BY RegionName
+OFFSET 0 ROWS FETCH NEXT 10 ROWS ONLY;
